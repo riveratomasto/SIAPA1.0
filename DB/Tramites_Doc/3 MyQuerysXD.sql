@@ -117,6 +117,45 @@ DELIMITER ;
 -- SHOW CREATE PROCEDURE TSP_FUT_INS;
 
 
+-- select * from FUT;
+
+
+-- EMITIDOS / visible solo por MESA DE PARTES
+
+DELIMITER //
+CREATE procedure TSP_INBOX_1 ( )
+begin
+	-- HelpDesk Imbox 
+	select id_fut,titulo_fut,tipo_doc,num_doc,fecha_reg,est1 from FUT F inner join estado_mov E on F.id_est_mov = E.id_est_mov
+	where id_fut in ( select id_fut from Movimientos where area_destino = 2 and flag = 1) and F.estado = 1;
+end 
+//
+DELIMITER ;
+
+-- call  TSP_INBOX_1 ( );
+
+DELIMITER //
+CREATE procedure TSP_INBOX_2 
+(
+id_area_ int
+)
+begin
+	-- Imbox all but not include helpDesk
+    select F.id_fut,titulo_fut,A.area'Area_Origen',prioridad,M.fecha_reg,est1 
+    from FUT F inner join estado_mov E on F.id_est_mov = E.id_est_mov inner join Movimientos M on F.id_fut = M.id_fut inner join areas A on M.area_origen = A.id_area
+    where /*M.area_destino <> 2 and */  M.area_destino = id_area_ and flag = 1 and F.estado = 1;   
+end 
+//
+DELIMITER ;
+
+/*
+call TSP_INBOX_2 (2);
+
+select * from areas;
+select * from Movimientos
+*/
+
+
 
 
 
