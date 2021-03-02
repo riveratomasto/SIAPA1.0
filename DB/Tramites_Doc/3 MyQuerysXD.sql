@@ -160,6 +160,61 @@ select * from Movimientos
 
 
 
+DELIMITER //
+create procedure TSP_MOV_INS
+(
+ area_origen_ int,
+ area_destino_ int,
+ obs_ text,
+ url_adjuntos_ varchar(150),
+ id_FUT_ int,
+ id_usuario_ int,
+ tipo_ int -- 1 = DERIVA / 2 = Resuelve / 3 = Rechaza
+ )
+begin
+
+Declare _iDeriva int; -- CONTADOR DE DERIVACIONES
+
+-- FLAG
+update movimientos set flag = 0 where id_FUT = id_FUT_;
+
+INSERT INTO movimientos (`fecha_reg`,`obs`,`url_adjunto`,`estado`,`id_fut`,`area_origen`,`area_destino`,`id_est_mov`,`id_usuario`,`flag`)
+VALUES (now(),obs_,url_adjuntos_,1,id_FUT_,area_origen_,area_destino_,2,id_usuario_,1);
+
+	if tipo_ = 1 then
+
+		-- 1ERA DERIVACION
+		select _iDeriva = count(*) from movimientos where id_FUT = id_FUT_ ;
+		
+		if _iDeriva = 2  then -- ( el 1ero es de emisor a MESa partes + 2do es la primera derivacion )
+			-- CREAR CARGO FUT + GENERAR NRO FUT + COMUNICAR AL USAUARIO
+			set @gato = null;
+		end if;
+		   
+	elseif tipo_ = 2 then		
+		Update FUT set id_est_mov = 3; -- ACTUALIZA EL ESTAOD A RESUELTO 		
+	elseif tipo_ = 3 then		
+		Update FUT set id_est_mov = 4; -- ACTUALIZA EL ESTAOD A RECHAZADO 
+
+	end if;
+
+end 
+//
+DELIMITER ;
+
+
+DELIMITER //
+CREATE procedure TSP_PRI_FUT
+(
+id_FUT_ int,
+prioridad_ int
+)
+begin
+	 update FUT set prioridad = prioridad_ where id_fut = id_FUT_;
+end 
+//
+DELIMITER ; 
 
 
 
+ 

@@ -41,6 +41,9 @@ router.get('/index',async (req, res) => {
       });	
 });
 
+
+/* PENDIENTE */
+
 router.get('/edit',async (req, res) => {
 
     const {idCalificacion} = req.params;
