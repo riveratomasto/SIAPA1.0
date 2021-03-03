@@ -65,6 +65,7 @@ app.use((error, req, res, next) => {
 app.use(require("./routes/authentication"));
 
 app.use("/fut", require("./routes/fut"));
+app.use("/mov", require("./routes/movimientos"));
 
 // app.use("/personal", require("./routes/personal"));
 // app.use("/api/notas", require("./routes/notas"));

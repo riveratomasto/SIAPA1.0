@@ -48,24 +48,29 @@ router.post('/insert',async (req, res) => {
 		}
         });	
  });
+ 
 
- router.put('/upd_Pri:pri',async (req, res) => {
+ router.put('/Upd_Pri/:idFut',async (req, res) => {
 
-    const {idCalificacion} = req.params;
-    const { C1,C2,C3,CanEval} = req.body;
+    const {idFut} = req.params;
+    const { prioridad} = req.body;
 
-	await pool.query('call Tsp_Up_NotasAlumnos_x_IdCalificacion_C1_C2_C3_CanEval (?,?,?,?,?)', [idCalificacion,C1,C2,C3,CanEval], (err,rows,fields) => {
+	await pool.query('call TSP_FUT_UPD_pri (?,?)', [idFut, prioridad], (err, rows, fields) => {
 
-		if(!err)
-		{
-			res.json( { message: 'Nota Actualizada : ' + idCalificacion + ' C1: ' + C1 + ' canEval: ' + CanEval} );			
-			 
-		}else{
-			console.log(err);
-			res.status(404).send({ error: "Ocurrio un suceso inesperado (put/notas/) : " + err });
-		}
-		});	
+         if (!err) {
+             res.json({ message: 'Fut : ' + idFut + ' set Priority in: ' + prioridad });
+
+         } else {
+             console.log(err);
+             res.status(404).send({ error: "Ocurrio un suceso inesperado (put/upd_Pri/) : " + err });
+         }
+     });	
+
  });
+
+
+
+
 
 
  module.exports = router;
