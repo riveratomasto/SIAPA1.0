@@ -79,66 +79,66 @@ export class PublicfutComponent implements OnInit,AfterViewInit,OnDestroy {
     // });
 
     // Change event
-    this.wizard.on('change', (wizardObj) => {
-      // setTimeout(() => {
-      //   KTUtil.scrollTop();
-      // }, 500);
+//     this.wizard.on('change', (wizardObj) => {
+//       // setTimeout(() => {
+//       //   KTUtil.scrollTop();
+//       // }, 500);
       
-// if(this.solicitudNoValido){
+// // if(this.solicitudNoValido){
 
   
-  // return Object.values(this.forma.controls).forEach( control => {
-  //   control.markAsTouched
-  // }),wizardObj.stop()
+//   // return Object.values(this.forma.controls).forEach( control => {
+//   //   control.markAsTouched
+//   // }),wizardObj.stop()
 
-  console.log(wizardObj.getStep());
+//   console.log(wizardObj.getStep());
 
-switch(wizardObj.getStep()){
+// switch(wizardObj.getStep()){
 
-case 1:
-  if(this.solicitudNV){
-    wizardObj.stop();
-  }
-  break;
-case 2:
-  if(this.apaternoNV || this.amaternoNV || this.nombresNV
-    || this.dniNV || this.telefonoNV || this.celularNV
-    || this.domicilioNV || this.emailNV
-      ){
-    wizardObj.stop();
-  }
-  break;
-case 3:
-  if(this.solicitudNV){
-    wizardObj.stop();
-  }
-  break;
-case 4:
-  if(this.solicitudNV){
-    wizardObj.stop();
+// case 1:
+//   if(this.solicitudNV){
+//     wizardObj.stop();
+//   }
+//   break;
+// case 2:
+//   if(this.apaternoNV || this.amaternoNV || this.nombresNV
+//     || this.dniNV || this.telefonoNV || this.celularNV
+//     || this.domicilioNV || this.emailNV
+//       ){
+//     wizardObj.stop();
+//   }
+//   break;
+// case 3:
+//   if(this.solicitudNV){
+//     wizardObj.stop();
+//   }
+//   break;
+// case 4:
+//   if(this.solicitudNV){
+//     wizardObj.stop();
 
-  }
-  // this.futModel.titulo_fut = this.forma.get('tsolicitud').value
-  break;
+//   }
+//   // this.futModel.titulo_fut = this.forma.get('tsolicitud').value
+//   break;
 
-}
-
-
-
-
-
-
-
-  
-// console.log(''+wizardObj.getStep());
-
-// wizardObj.stop()
 // }
 
 
 
 
-    });
+
+
+
+  
+// // console.log(''+wizardObj.getStep());
+
+// // wizardObj.stop()
+// // }
+
+
+
+
+//     });
   }
 
   onSubmit() {
